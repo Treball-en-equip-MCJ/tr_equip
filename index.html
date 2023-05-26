@@ -1,20 +1,22 @@
 <!DOCTYPE html> 
 <html>
-	<head>
-		<link rel="stylesheet" href="pi_2/styles/main.css">
-		<script src="./pi_2/js/loader.js"></script>
-		<script src="./pi_2/js/game_info.js"></script>
-		<script src="./pi_2/js/menu_controller.js"></script>
-		<script src="./pi_3/js/menu_controller.js"></script>
-		<script src="./ti_1/js/menu_controller.js"></script>
-		<title>Pràctica en equip - Menú</title>
-	</head>
-	<body>
-		<p class="menu-object" id="title"> -INSERT GAME NAME-</p>
-		<div class="button_inici">
-		<button class="menu-object" onclick="iniciar()"> 
-			Iniciar Joc
-		</button>
-		</div>
-	</body>
+		<head>
+			<link rel="stylesheet" href="./pi_2/styles/main.css">
+			<script src="./pi_2/js/loader.js"></script>
+			<script src="./pi_2/js/menu_controller.js"></script>
+			<script src="./pi_3/js/loader.js"></script>
+			<script src="./pi_3/js/menu_controller.js"></script>
+			<script src="./pi_phaser/js/loader.js"></script>
+			<script src="./pi_phaser/js/menu_controller.js"></script>
+			<title>Pràctica individual 1</title>
+		</head>
+		<body>
+			<p class="index-object" id="index-title">  Primera web de prova</p>
+			<button class="index-object" onclick="carrega_pi_2()">
+			Entra a Pi_2</button>
+			<button class="index-object" onclick="carrega_pi_3()">
+				Entra a Pi_3</button>
+			<button class="index-object" onclick="phaser_game()">
+				Entra a Pi_Phaser</button>
+		</body>
 </html>
