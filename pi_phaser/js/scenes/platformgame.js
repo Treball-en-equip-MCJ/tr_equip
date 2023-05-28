@@ -4,11 +4,15 @@ class PlatformScene extends Phaser.Scene {
 		this.platforms=null;
 		this.player=null;
 		this.cursors=null;
+		this.doors=null;
+		this.hidden=false;
 	}
 	
 	preload(){
 		this.load.image('background','../resources/escen2.png');
 		this.load.image('ground','../resources/ground.png');
+		this.load.image('door','../resources/door.png');
+		this.load.image('porta','../resources/door.png');
 		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48});
 	}
 
@@ -26,6 +30,14 @@ class PlatformScene extends Phaser.Scene {
 			this.platforms.create(1550,461,'ground').setScale(1.6).refreshBody();
 		}
 		{
+			this.doors=this.physics.add.group({
+				key: 'door',
+				repeat: 6,
+				setXY: {x:12,y:0,stepX:200}
+			});
+			this.doors.create(200,500,'door').setScale(0.9).refreshBody();
+		}
+		{
 			this.player=this.physics.add.sprite(100,570,'dude');
 			this.player.setBounce(0.2);
 			this.player.setCollideWorldBounds(true);
@@ -33,7 +45,9 @@ class PlatformScene extends Phaser.Scene {
 		}
 		{
 			this.physics.add.collider(this.player,this.platforms);
+			this.physics.add.collider(this.doors,this.platforms);
 			this.cursors=this.input.keyboard.createCursorKeys();
+			this.physics.add.overlap(this.player,this.doors,(body1,body2)=>this.hidebehind(body1,body2));
 		}
 		
 	}
@@ -51,9 +65,33 @@ class PlatformScene extends Phaser.Scene {
 			this.player.setVelocityX(0);
 			//animació aqui
 		}
-		if(this.cursors.up.isDown && this.player.body.touching.down){
+		/*if(this.cursors.up.isDown && this.player.body.touching.down){
 			this.player.setVelocityY(-400);
 			//animació aqui
+		}*/
+	}
+	hidebehind(player,door){
+		var porta=null;
+		if(this.cursors.up.isDown && this.player.body.touching.down){	
+			if(!this.hidden){
+				this.hidden=true;
+				console.log("hidden");
+				porta=this.add.image(200,500,'porta').setScale(0.9);
+			}
 		}
+		else{
+			if(this.hidden){
+				this.hidden=false;
+				console.log("Not hidden");
+				porta=null;
+			}
+		}//INTENTAR TANCAR LA PORTA
+		/*setTimeout(() => {
+			if(this.hidden){
+				this.hidden=false;
+				console.log("not hidden");
+				door.disableBody(true,true);
+			}
+		},5000);*/
 	}
 }
