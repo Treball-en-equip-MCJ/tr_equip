@@ -38,8 +38,10 @@ class PlatformScene extends Phaser.Scene {
 		}
 		{
 			this.doors=this.physics.add.staticGroup();
-			this.doors.create(200,575,'door').setScale(0.9).refreshBody();
+			this.doors.create(348,575,'door').setScale(0.9).refreshBody();
 			this.portes=this.physics.add.staticGroup();
+			this.meta=this.physics.add.staticGroup();
+			this.meta.create(1123,170,'door').setScale(0.9).refreshBody();
 		}
 		{
 			this.player=this.physics.add.sprite(100,570,'dude');
@@ -52,6 +54,7 @@ class PlatformScene extends Phaser.Scene {
 			this.enemy.setBounce(0.2);
 			this.enemy.setCollideWorldBounds(true);
 			this.enemy.setVelocityX(this.velocitatEnemy);
+			this.enemy.depth=3;
 			//FALTEN ANIMACIONS	
 		}
 		{
@@ -61,6 +64,7 @@ class PlatformScene extends Phaser.Scene {
 			this.cursors=this.input.keyboard.createCursorKeys();
 			this.physics.add.overlap(this.player,this.doors,(body1,body2)=>this.hidebehind(body1,body2));
 			this.physics.add.overlap(this.player,this.enemy,(body1,body2)=>this.collision(body1,body2));
+			this.physics.add.overlap(this.player,this.meta,(body1,body2)=>this.guanya(body1,body2));
 		}
 		
 		setInterval(() => {
@@ -78,11 +82,11 @@ class PlatformScene extends Phaser.Scene {
 	}
 
 	update(){
-		if(this.cursors.left.isDown){
+		if(this.cursors.left.isDown && !this.hidden){
 			this.player.setVelocityX(-160);
 			//animació aqui
 		}
-		else if(this.cursors.right.isDown){
+		else if(this.cursors.right.isDown && !this.hidden){
 			this.player.setVelocityX(160);
 			//animació aqui
 		}
@@ -90,10 +94,14 @@ class PlatformScene extends Phaser.Scene {
 			this.player.setVelocityX(0);
 			//animació aqui
 		}
-		/*if(this.cursors.up.isDown && this.player.body.touching.down){
-			this.player.setVelocityY(-400);
-			//animació aqui
-		}*/
+		if(this.cursors.up.isDown && this.player.body.touching.down){
+			setTimeout(() => {
+				if(!this.hidden){
+					this.player.setVelocityY(-400);
+					//animació aqui
+				}
+			},50)
+		}
 
 	}
 
@@ -107,14 +115,29 @@ class PlatformScene extends Phaser.Scene {
 		}
 		else{
 			if(this.hidden){
-				this.hidden=false;
-				console.log("Not hidden");
-				this.portes.remove(this.portes.getLast(true), true);
+				setTimeout(() => {
+					this.hidden=false;
+					console.log("Not hidden");
+					this.portes.remove(this.portes.getLast(true), true);
+				},50)
 			}
 		}
 	}
 
 	collision(player,enemy){
+		if(!this.hidden){
+			console.log("tocat");
+		}
+		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
+	}
+	guanya(player,meta){
+		if(this.cursors.up.isDown && this.player.body.touching.down){	
+			if(!this.hidden){
+				this.hidden=true;
+				console.log("guanyes");
+				this.portes.create(meta.x,meta.y,'porta').setScale(0.9).refreshBody();
+			}
+		}
 		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
 	}
 }
