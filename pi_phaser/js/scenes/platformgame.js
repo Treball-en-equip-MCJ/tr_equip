@@ -123,6 +123,6 @@ class PlatformScene extends Phaser.Scene {
 	}
 
 	collision(player,enemy){
-		this.player.reset(100,560);
+		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
 	}
 }
