@@ -3,9 +3,12 @@ class PlatformScene extends Phaser.Scene {
 		super('PlatformScene');
 		this.platforms=null;
 		this.player=null;
+		this.enemy=null;
 		this.cursors=null;
 		this.doors=null;
 		this.hidden=false;
+		this.velocitatEnemy=60;
+		this.tempor=2000;
 	}
 	
 	preload(){
@@ -14,6 +17,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/door.png');
 		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48});
+		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:20,frameHeight:33});
 	}
 
 	create(){
@@ -44,7 +48,15 @@ class PlatformScene extends Phaser.Scene {
 			//FALTEN ANIMACIONS
 		}
 		{
+			this.enemy=this.physics.add.sprite(600,570,'enemy');
+			this.enemy.setBounce(0.2);
+			this.enemy.setCollideWorldBounds(true);
+			this.enemy.setVelocityX(this.velocitatEnemy);
+			//FALTEN ANIMACIONS	
+		}
+		{
 			this.physics.add.collider(this.player,this.platforms);
+			this.physics.add.collider(this.enemy,this.platforms);
 			this.physics.add.collider(this.doors,this.platforms);
 			this.cursors=this.input.keyboard.createCursorKeys();
 			this.physics.add.overlap(this.player,this.doors,(body1,body2)=>this.hidebehind(body1,body2));
@@ -94,4 +106,7 @@ class PlatformScene extends Phaser.Scene {
 			}
 		},5000);*/
 	}
+	setTimeout(() => {
+		this.enemy.setVelocityX(-60);
+	}, this.tempor);
 }
