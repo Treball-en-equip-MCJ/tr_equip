@@ -3,20 +3,23 @@ class PlatformScene extends Phaser.Scene {
 		super('PlatformScene');
 		this.platforms=null;
 		this.player=null;
-		this.enemy=null;
 		this.cursors=null;
 		this.doors=null;
 		this.hidden=false;
+		this.portes=null; //Ajuda per crear les portes tancades
+		this.escales=null; //Escales repartides al mapa
+		this.meta=null; //Porta final
 		this.velocitatEnemy=40;
 		this.enemicDreta=true
+		this.enemy=null;
 	}
 	
 	preload(){
-		this.load.image('background','../resources/escen2.png');
-		this.load.image('ground','../resources/ground.png');
+		this.load.image('background','../resources/escen2.png'); //Modificar amb un fons sense llocs per a les portes
+		this.load.image('ground','../resources/ground.png');//Modificar amb el sprite del terra
 		this.load.image('door','../resources/door.png');
-		this.load.image('porta','../resources/door.png');
-		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48});
+		this.load.image('porta','../resources/door.png'); //Modificar amb el sprite de la porta tancada
+		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
 	}
 
@@ -34,12 +37,9 @@ class PlatformScene extends Phaser.Scene {
 			this.platforms.create(1550,461,'ground').setScale(1.6).refreshBody();
 		}
 		{
-			this.doors=this.physics.add.group({
-				key: 'door',
-				repeat: 6,
-				setXY: {x:12,y:0,stepX:200}
-			});
-			this.doors.create(200,500,'door').setScale(0.9).refreshBody();
+			this.doors=this.physics.add.staticGroup();
+			this.doors.create(200,575,'door').setScale(0.9).refreshBody();
+			this.portes=this.physics.add.staticGroup();
 		}
 		{
 			this.player=this.physics.add.sprite(100,570,'dude');
@@ -98,28 +98,20 @@ class PlatformScene extends Phaser.Scene {
 	}
 
 	hidebehind(player,door){
-		var porta=null;
 		if(this.cursors.up.isDown && this.player.body.touching.down){	
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("hidden");
-				porta=this.add.image(200,500,'porta').setScale(0.9);
+				this.portes.create(door.x,door.y,'porta').setScale(0.9).refreshBody();
 			}
 		}
 		else{
 			if(this.hidden){
 				this.hidden=false;
 				console.log("Not hidden");
-				porta=null;
+				this.portes.remove(this.portes.getLast(true), true);
 			}
-		}//INTENTAR TANCAR LA PORTA
-		/*setTimeout(() => {
-			if(this.hidden){
-				this.hidden=false;
-				console.log("not hidden");
-				door.disableBody(true,true);
-			}
-		},5000);*/
+		}
 	}
 
 	collision(player,enemy){
