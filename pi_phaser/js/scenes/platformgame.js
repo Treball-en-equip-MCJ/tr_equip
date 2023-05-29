@@ -110,6 +110,7 @@ class PlatformScene extends Phaser.Scene {
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("hidden");
+				//Rand para cambiar sprite de puerta a no molestar
 				this.portes.create(door.x,door.y,'porta').setScale(0.9).refreshBody();
 			}
 		}
