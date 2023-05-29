@@ -7,8 +7,8 @@ class PlatformScene extends Phaser.Scene {
 		this.cursors=null;
 		this.doors=null;
 		this.hidden=false;
-		this.velocitatEnemy=60;
-		this.tempor=2000;
+		this.velocitatEnemy=40;
+		this.enemicDreta=true
 	}
 	
 	preload(){
@@ -17,7 +17,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/door.png');
 		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48});
-		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:20,frameHeight:33});
+		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
 	}
 
 	create(){
@@ -48,20 +48,32 @@ class PlatformScene extends Phaser.Scene {
 			//FALTEN ANIMACIONS
 		}
 		{
-			this.enemy=this.physics.add.sprite(600,570,'enemy');
+			this.enemy=this.physics.add.sprite(360,570,'enemy');
 			this.enemy.setBounce(0.2);
 			this.enemy.setCollideWorldBounds(true);
-			this.enemy.setVelocityX(60);
+			this.enemy.setVelocityX(this.velocitatEnemy);
 			//FALTEN ANIMACIONS	
 		}
 		{
 			this.physics.add.collider(this.player,this.platforms);
 			this.physics.add.collider(this.enemy,this.platforms);
 			this.physics.add.collider(this.doors,this.platforms);
-			this.physics.add.collider(this.player.this.enemy);
 			this.cursors=this.input.keyboard.createCursorKeys();
 			this.physics.add.overlap(this.player,this.doors,(body1,body2)=>this.hidebehind(body1,body2));
+			this.physics.add.overlap(this.player,this.enemy,(body1,body2)=>this.collision(body1,body2));
 		}
+		
+		setInterval(() => {
+			if (this.velocitatEnemy > 0){
+				this.velocitatEnemy = -40;
+				this.enemicDreta = false;
+			}
+			else{
+				this.velocitatEnemy = 40;
+				this.enemicDreta = true;
+			}
+			this.enemy.setVelocityX(this.velocitatEnemy);
+		}, 10000);
 		
 	}
 
@@ -82,11 +94,7 @@ class PlatformScene extends Phaser.Scene {
 			this.player.setVelocityY(-400);
 			//animació aqui
 		}*/
-		
-		setTimeout(() => {
-			this.velocitatEnemy = -this.velocitatEnemy;
-			this.enemy.setVelocityX(this.velocitatEnemy);
-		},1000);
+
 	}
 
 	hidebehind(player,door){
@@ -112,5 +120,9 @@ class PlatformScene extends Phaser.Scene {
 				door.disableBody(true,true);
 			}
 		},5000);*/
+	}
+
+	collision(player,enemy){
+		this.player.reset(100,560);
 	}
 }
