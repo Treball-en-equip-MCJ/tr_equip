@@ -12,6 +12,9 @@ class PlatformScene extends Phaser.Scene {
 		this.velocitatEnemy=40;
 		this.enemicDreta=true
 		this.enemy=null;
+		this.nVides=3;
+		this.spawnx=100;
+		this.spawny=570;
 	}
 	
 	preload(){
@@ -44,7 +47,7 @@ class PlatformScene extends Phaser.Scene {
 			this.meta.create(1123,170,'door').setScale(0.9).refreshBody();
 		}
 		{
-			this.player=this.physics.add.sprite(100,570,'dude');
+			this.player=this.physics.add.sprite(this.spawnx,this.spawny,'dude');
 			this.player.setBounce(0.2);
 			this.player.setCollideWorldBounds(true);
 			//FALTEN ANIMACIONS
@@ -128,8 +131,15 @@ class PlatformScene extends Phaser.Scene {
 	collision(player,enemy){
 		if(!this.hidden){
 			console.log("tocat");
+			this.nVides -= 1;
+			if (this.nVides < 0){
+				//PERDRE
+			}
+			else{
+				//RESPAWNEAR
+			}
+			console.log(this.nVides);
 		}
-		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
 	}
 	guanya(player,meta){
 		if(this.cursors.up.isDown && this.player.body.touching.down){	
@@ -137,6 +147,7 @@ class PlatformScene extends Phaser.Scene {
 				this.hidden=true;
 				console.log("guanyes");
 				this.portes.create(meta.x,meta.y,'porta').setScale(0.9).refreshBody();
+				this.nVides += 1;
 			}
 		}
 		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
