@@ -5,6 +5,7 @@ class PlatformScene extends Phaser.Scene {
 		this.player=null;
 		this.cursors=null;
 		this.doors=null;
+		this.stairs=null;
 		this.hidden=false;
 		this.portes=null; //Ajuda per crear les portes tancades
 		this.escales=null; //Escales repartides al mapa
@@ -66,12 +67,22 @@ class PlatformScene extends Phaser.Scene {
 		}
 		{
 			this.doors=this.physics.add.staticGroup();
+			
 			this.doors.create(316.5,564,'door').setScale(0.9).refreshBody();
 			this.doors.create(739.5,564,'door').setScale(0.9).refreshBody();
 			this.doors.create(1514.5,564,'door').setScale(0.9).refreshBody();
+			
+			this.doors.create(387,155,'door').setScale(0.9).refreshBody();
+			this.doors.create(105,155,'door').setScale(0.9).refreshBody();
+			this.doors.create(739.5,155,'door').setScale(0.9).refreshBody();
+
+			this.doors.create(668.5,359,'door').setScale(0.9).refreshBody();
+			this.doors.create(1232,359,'door').setScale(0.9).refreshBody();
+			this.doors.create(175,359,'door').setScale(0.9).refreshBody();
+			
 			this.portes=this.physics.add.staticGroup();
 			this.meta=this.physics.add.staticGroup();
-			this.meta.create(1123,170,'door').setScale(0.9).refreshBody();
+			this.meta.create(1091.5,155,'door').setScale(0.9).refreshBody();
 		}
 		{
 			this.player=this.physics.add.sprite(this.spawnx,this.spawny,'dude');
@@ -173,7 +184,7 @@ class PlatformScene extends Phaser.Scene {
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("guanyes");
-				this.portes.create(meta.x,meta.y,'porta').setScale(0.9).refreshBody();
+				this.portes.create(meta.x,meta.y,'porta2').setScale(0.19).refreshBody();
 				this.nVides += 1;
 			}
 		}
