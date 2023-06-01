@@ -26,7 +26,7 @@ class PlatformScene extends Phaser.Scene {
 		this.arrayenemys=[]
 		this.nVides=3;
 		this.spawnx=100;
-		this.spawny=570;
+		this.spawny=555;
 	}
 	
 	preload(){
@@ -37,7 +37,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
-		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48}); //Modificar amb el personatge
+		this.load.spritesheet('dude','../resources/girl.png',{frameWidth:128,frameHeight:128}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
 	}
 
@@ -99,7 +99,26 @@ class PlatformScene extends Phaser.Scene {
 			this.player=this.physics.add.sprite(this.spawnx,this.spawny,'dude');
 			this.player.setBounce(0.2);
 			this.player.setCollideWorldBounds(true);
-			//FALTEN ANIMACIONS
+			
+			this.anims.create({
+				key: 'left',
+				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6 }),
+				frameRate: 10,
+				repeat: -1
+			});
+
+			this.anims.create({
+				key: 'turn',
+				frames: [ { key: 'dude', frame: 4 } ],
+				frameRate: 20
+			});
+
+			this.anims.create({
+				key: 'right',
+				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6 }),
+				frameRate: 10,
+				repeat: -1
+			});
 		}
 		{
 			this.enemy1=this.physics.add.sprite(200,570,'enemy');
