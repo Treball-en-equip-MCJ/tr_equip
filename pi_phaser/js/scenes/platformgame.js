@@ -18,30 +18,57 @@ class PlatformScene extends Phaser.Scene {
 	}
 	
 	preload(){
-		this.load.image('background','../resources/escen2.png'); //Modificar amb un fons sense llocs per a les portes
+		this.load.image('background','../resources/fondo grande.png'); //Modificar amb un fons sense llocs per a les portes
 		this.load.image('ground','../resources/ground.png');//Modificar amb el sprite del terra
+		this.load.image('ground2','../resources/ground2.png');
+		this.load.image('ground3','../resources/ground3.png');
 		this.load.image('door','../resources/door.png');
-		this.load.image('porta','../resources/door.png'); //Modificar amb el sprite de la porta tancada
+		this.load.image('porta','../resources/porta1.png'); 
+		this.load.image('porta2','../resources/porta2.png'); 
 		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:32,frameHeight:48}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
 	}
 
 	create(){
-		this.add.image(600,350,'background');
+		this.add.image(600,350,'background').setScale(0.6);
 		{
 			this.platforms = this.physics.add.staticGroup();
-			this.platforms.create(600,0,'ground').setScale(4.1).refreshBody();
-			this.platforms.create(600,700,'ground').setScale(3.2).refreshBody();
-			this.platforms.create(-350,258,'ground').setScale(1.6).refreshBody();
-			this.platforms.create(600,258,'ground').setScale(1.6).refreshBody();
-			this.platforms.create(800,258,'ground').setScale(1.6).refreshBody();
-			this.platforms.create(0,461,'ground').setScale(1.6).refreshBody();
-			this.platforms.create(580,461,'ground').setScale(1.6).refreshBody();
-			this.platforms.create(1550,461,'ground').setScale(1.6).refreshBody();
+			this.platforms.create(600,40,'ground').setScale(1.5).refreshBody();
+			this.platforms.create(600,740,'ground').setScale(1.5).refreshBody();
+			this.platforms.create(600,662,'ground3').setScale(1.5).refreshBody();
+			this.platforms.create(100,662,'ground3').setScale(1.5).refreshBody();
+			this.platforms.create(1000,662,'ground3').setScale(1.5).refreshBody();
+			this.platforms.create(1400,662,'ground3').setScale(1.5).refreshBody();
+			this.platforms.create(1800,662,'ground3').setScale(1.5).refreshBody();
+			this.platforms.create(600,668,'ground').setScale(1.5).refreshBody();
+			
+			this.platforms.create(0,246,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(490,246,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(900,246,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(1270,246,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(1760,246,'ground3').setScale(1.25).refreshBody();
+			
+			this.platforms.create(0,252,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(490,252,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(900,252,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(1270,252,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(1760,252,'ground2').setScale(1.25).refreshBody();
+			
+			this.platforms.create(210,450,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(700,450,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(1190,450,'ground3').setScale(1.25).refreshBody();
+			this.platforms.create(1680,450,'ground3').setScale(1.25).refreshBody();
+
+			this.platforms.create(210,456,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(700,456,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(1190,456,'ground2').setScale(1.25).refreshBody();
+			this.platforms.create(1680,456,'ground2').setScale(1.25).refreshBody();
 		}
 		{
 			this.doors=this.physics.add.staticGroup();
-			this.doors.create(348,575,'door').setScale(0.9).refreshBody();
+			this.doors.create(316.5,564,'door').setScale(0.9).refreshBody();
+			this.doors.create(739.5,564,'door').setScale(0.9).refreshBody();
+			this.doors.create(1514.5,564,'door').setScale(0.9).refreshBody();
 			this.portes=this.physics.add.staticGroup();
 			this.meta=this.physics.add.staticGroup();
 			this.meta.create(1123,170,'door').setScale(0.9).refreshBody();
@@ -114,7 +141,7 @@ class PlatformScene extends Phaser.Scene {
 				this.hidden=true;
 				console.log("hidden");
 				//Rand para cambiar sprite de puerta a no molestar
-				this.portes.create(door.x,door.y,'porta').setScale(0.9).refreshBody();
+				this.portes.create(door.x,door.y,'porta').setScale(0.19).refreshBody();
 			}
 		}
 		else{

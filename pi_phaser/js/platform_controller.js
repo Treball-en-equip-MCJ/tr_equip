@@ -1,8 +1,8 @@
 
 var config={
 	type:Phaser.AUTO,
-	width:1200,
-	heigh:700,
+	width:1685,
+	heigh:900,
 	parent:'game_area',
 	physics: {
 		default:'arcade',
