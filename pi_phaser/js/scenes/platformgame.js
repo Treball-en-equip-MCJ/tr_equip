@@ -156,9 +156,6 @@ class PlatformScene extends Phaser.Scene {
 			this.enemy9.setVelocityX(this.velocitatEnemy1);
 			this.enemy9.depth=3;
 			this.arrayenemys.push(this.enemy9);
-			for (let i=0; i<this.arrayenemys.length; i++){
-				console.log("existe"+i);
-			}
 			//FALTEN ANIMACIONS	
 		}
 		{
@@ -170,7 +167,6 @@ class PlatformScene extends Phaser.Scene {
 			for (let i=0; i<this.arrayenemys.length; i++){
 				this.physics.add.collider(this.arrayenemys[i],this.platforms);
 				this.physics.add.overlap(this.player,this.arrayenemys[i],(body1,body2)=>this.collision(body1,body2));
-				console.log("colisiones"+i);
 			}
 		}
 		
