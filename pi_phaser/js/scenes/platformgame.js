@@ -13,6 +13,12 @@ class PlatformScene extends Phaser.Scene {
 		this.velocitatEnemy1=40;
 		this.velocitatEnemy2=40;
 		this.velocitatEnemy3=40;
+		this.velocitatEnemy4=40;
+		this.velocitatEnemy5=40;
+		this.velocitatEnemy6=40;
+		this.velocitatEnemy7=40;
+		this.velocitatEnemy8=40;
+		this.velocitatEnemy9=40;
 		this.enemicDreta=true
 		this.enemy1=null;
 		this.enemy2=null;
@@ -127,52 +133,52 @@ class PlatformScene extends Phaser.Scene {
 			this.enemy1.setVelocityX(this.velocitatEnemy1);
 			this.enemy1.depth=3;
 			this.arrayenemys.push(this.enemy1);
-			this.enemy2=this.physics.add.sprite(960,570,'enemy');
+			this.enemy2=this.physics.add.sprite(1200,570,'enemy');
 			this.enemy2.setBounce(0.2);
 			this.enemy2.setCollideWorldBounds(true);
-			this.enemy2.setVelocityX(this.velocitatEnemy1);
+			this.enemy2.setVelocityX(this.velocitatEnemy2);
 			this.enemy2.depth=3;
 			this.arrayenemys.push(this.enemy2);
-			this.enemy3=this.physics.add.sprite(100,360,'enemy');
+			this.enemy3=this.physics.add.sprite(60,360,'enemy');
 			this.enemy3.setBounce(0.2);
 			this.enemy3.setCollideWorldBounds(true);
-			this.enemy3.setVelocityX(this.velocitatEnemy2);
+			this.enemy3.setVelocityX(this.velocitatEnemy3);
 			this.enemy3.depth=3;
 			this.arrayenemys.push(this.enemy3);
-			this.enemy4=this.physics.add.sprite(600,360,'enemy');
+			this.enemy4=this.physics.add.sprite(560,360,'enemy');
 			this.enemy4.setBounce(0.2);
 			this.enemy4.setCollideWorldBounds(true);
-			this.enemy4.setVelocityX(this.velocitatEnemy2);
+			this.enemy4.setVelocityX(this.velocitatEnemy4);
 			this.enemy4.depth=3;
 			this.arrayenemys.push(this.enemy4);
-			this.enemy5=this.physics.add.sprite(1160,360,'enemy');
+			this.enemy5=this.physics.add.sprite(1050,360,'enemy');
 			this.enemy5.setBounce(0.2);
 			this.enemy5.setCollideWorldBounds(true);
-			this.enemy5.setVelocityX(this.velocitatEnemy2);
+			this.enemy5.setVelocityX(this.velocitatEnemy5);
 			this.enemy5.depth=3;
 			this.arrayenemys.push(this.enemy5);
-			this.enemy6=this.physics.add.sprite(100,150,'enemy');
+			this.enemy6=this.physics.add.sprite(60,150,'enemy');
 			this.enemy6.setBounce(0.2);
 			this.enemy6.setCollideWorldBounds(true);
-			this.enemy6.setVelocityX(this.velocitatEnemy3);
+			this.enemy6.setVelocityX(this.velocitatEnemy6);
 			this.enemy6.depth=3;
 			this.arrayenemys.push(this.enemy6);
-			this.enemy7=this.physics.add.sprite(300,150,'enemy');
+			this.enemy7=this.physics.add.sprite(350,150,'enemy');
 			this.enemy7.setBounce(0.2);
 			this.enemy7.setCollideWorldBounds(true);
-			this.enemy7.setVelocityX(this.velocitatEnemy3);
+			this.enemy7.setVelocityX(this.velocitatEnemy7);
 			this.enemy7.depth=3;
 			this.arrayenemys.push(this.enemy7);
-			this.enemy8=this.physics.add.sprite(650,150,'enemy');
+			this.enemy8=this.physics.add.sprite(710,150,'enemy');
 			this.enemy8.setBounce(0.2);
 			this.enemy8.setCollideWorldBounds(true);
-			this.enemy8.setVelocityX(this.velocitatEnemy1);
+			this.enemy8.setVelocityX(this.velocitatEnemy8);
 			this.enemy8.depth=3;
 			this.arrayenemys.push(this.enemy8);
-			this.enemy9=this.physics.add.sprite(1060,150,'enemy');
+			this.enemy9=this.physics.add.sprite(1000,150,'enemy');
 			this.enemy9.setBounce(0.2);
 			this.enemy9.setCollideWorldBounds(true);
-			this.enemy9.setVelocityX(this.velocitatEnemy1);
+			this.enemy9.setVelocityX(this.velocitatEnemy9);
 			this.enemy9.depth=3;
 			this.arrayenemys.push(this.enemy9);
 			//FALTEN ANIMACIONS	
@@ -189,7 +195,7 @@ class PlatformScene extends Phaser.Scene {
 			}
 		}
 		
-		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 1,2,8,9
+		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 1
 			if (this.velocitatEnemy1 > 0){
 				this.velocitatEnemy1 = -40;
 			}
@@ -197,33 +203,87 @@ class PlatformScene extends Phaser.Scene {
 				this.velocitatEnemy1 = 40;
 			}
 			this.arrayenemys[0].setVelocityX(this.velocitatEnemy1);
-			this.arrayenemys[1].setVelocityX(this.velocitatEnemy1);
-			this.arrayenemys[7].setVelocityX(this.velocitatEnemy1);
-			this.arrayenemys[8].setVelocityX(this.velocitatEnemy1);
-		}, 10000);
+		}, 17000);
 		
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 3,4,5
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 2
 			if (this.velocitatEnemy2 > 0){
 				this.velocitatEnemy2 = -40;
 			}
 			else{
 				this.velocitatEnemy2 = 40;
 			}
-			this.arrayenemys[2].setVelocityX(this.velocitatEnemy2);
-			this.arrayenemys[3].setVelocityX(this.velocitatEnemy2);
-			this.arrayenemys[4].setVelocityX(this.velocitatEnemy2);
-		}, 6000);
+			this.arrayenemys[1].setVelocityX(this.velocitatEnemy2);
+		}, 10500);
 
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 6,7
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 3
 			if (this.velocitatEnemy3 > 0){
 				this.velocitatEnemy3 = -40;
 			}
 			else{
 				this.velocitatEnemy3 = 40;
 			}
-			this.arrayenemys[5].setVelocityX(this.velocitatEnemy3);
-			this.arrayenemys[6].setVelocityX(this.velocitatEnemy3);
+			this.arrayenemys[2].setVelocityX(this.velocitatEnemy3);
+		}, 8000);
+
+		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 4
+			if (this.velocitatEnemy4 > 0){
+				this.velocitatEnemy4 = -40;
+			}
+			else{
+				this.velocitatEnemy4 = 40;
+			}
+			this.arrayenemys[3].setVelocityX(this.velocitatEnemy4);
+		}, 9000);
+		
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 5
+			if (this.velocitatEnemy5 > 0){
+				this.velocitatEnemy5 = -40;
+			}
+			else{
+				this.velocitatEnemy5 = 40;
+			}
+			this.arrayenemys[4].setVelocityX(this.velocitatEnemy5);
+		}, 8500);
+
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 6
+			if (this.velocitatEnemy6 > 0){
+				this.velocitatEnemy6 = -40;
+			}
+			else{
+				this.velocitatEnemy6 = 40;
+			}
+			this.arrayenemys[5].setVelocityX(this.velocitatEnemy6);
 		}, 4000);
+
+		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 7
+			if (this.velocitatEnemy7 > 0){
+				this.velocitatEnemy7 = -40;
+			}
+			else{
+				this.velocitatEnemy7 = 40;
+			}
+			this.arrayenemys[6].setVelocityX(this.velocitatEnemy7);
+		}, 7000);
+		
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 8
+			if (this.velocitatEnemy8 > 0){
+				this.velocitatEnemy8 = -40;
+			}
+			else{
+				this.velocitatEnemy8 = 40;
+			}
+			this.arrayenemys[7].setVelocityX(this.velocitatEnemy8);
+		}, 13000);
+
+		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 9
+			if (this.velocitatEnemy9 > 0){
+				this.velocitatEnemy9 = -40;
+			}
+			else{
+				this.velocitatEnemy9 = 40;
+			}
+			this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
+		}, 12000);
 
 	}
 
