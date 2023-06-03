@@ -6,6 +6,8 @@ class PlatformScene extends Phaser.Scene {
 		this.player=null;
 		this.cursors=null;
 		this.doors=null;
+		this.keys=null;
+		this.claus_tot=0;
 		this.stairs=null;
 		this.hidden=false;
 		this.portes=null; //Ajuda per crear les portes tancades
@@ -43,6 +45,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('ground','../resources/ground.png');//Modificar amb el sprite del terra
 		this.load.image('ground2','../resources/ground2.png');
 		this.load.image('ground3','../resources/ground3.png');
+		this.load.image('key','../resources/key.png');
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
@@ -52,7 +55,6 @@ class PlatformScene extends Phaser.Scene {
 	}
 
 	create(){
-	
 		this.add.image(600,350,'background').setScale(0.6);	
 		{
 			this.platforms = this.physics.add.staticGroup();
@@ -87,7 +89,12 @@ class PlatformScene extends Phaser.Scene {
 			this.platforms.create(1190,456,'ground2').setScale(1.25).refreshBody();
 			this.platforms.create(1680,456,'ground2').setScale(1.25).refreshBody();
 		}
-		{
+		{//CREEM LES CLAUS I LES PORTES
+			this.keys=this.physics.add.staticGroup();
+			this.keys.create(50,170,'key').setScale(0.3).refreshBody();
+			this.keys.create(500,170,'key').setScale(0.3).refreshBody();
+			this.keys.create(1570,564,'key').setScale(0.3).refreshBody();
+
 			this.doors=this.physics.add.staticGroup();
 			
 			this.doors.create(316.5,564,'door').setScale(0.9).refreshBody();
@@ -191,9 +198,11 @@ class PlatformScene extends Phaser.Scene {
 		{
 			this.physics.add.collider(this.player,this.platforms);
 			this.physics.add.collider(this.doors,this.platforms);
+			this.physics.add.collider(this.keys,this.platforms);
 			this.cursors=this.input.keyboard.createCursorKeys();
 			this.physics.add.overlap(this.player,this.doors,(body1,body2)=>this.hidebehind(body1,body2));
 			this.physics.add.overlap(this.player,this.meta,(body1,body2)=>this.guanya(body1,body2));
+			this.physics.add.overlap(this.player,this.keys,(body1,body2)=>this.agafa_key(body1,body2));
 			for (let i=0; i<this.arrayenemys.length; i++){
 				this.physics.add.collider(this.arrayenemys[i],this.platforms);
 				this.physics.add.overlap(this.player,this.arrayenemys[i],(body1,body2)=>this.collision(body1,body2));
@@ -362,7 +371,6 @@ class PlatformScene extends Phaser.Scene {
 		}
 		
 	}
-
 	collision(player,enemy){
 		if(!this.hidden){
 			console.log("tocat");
@@ -370,7 +378,7 @@ class PlatformScene extends Phaser.Scene {
 		}
 	}
 	guanya(player,meta){
-		if(this.cursors.up.isDown && this.player.body.touching.down){	
+		if(this.cursors.up.isDown && this.player.body.touching.down && this.claus_tot==3){	
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("guanyes");
@@ -379,16 +387,21 @@ class PlatformScene extends Phaser.Scene {
 			}
 		}
 	}
+	agafa_key(player,key){
+		this.claus_tot++;
+		console.log(this.claus_tot)
+		key.disableBody(true,true)
+	}
 	createPauseScreen(){
 		this.botoResume.visible=true;
 		this.botoSortir.visible=true;
-		this.physics.pause()
+		this.physics.pause();
 		this.pausat=true;
 	}
 	removePauseScreen(){
 		this.botoResume.visible=false;
 		this.botoSortir.visible=false;
-		this.physics.resume()
+		this.physics.resume();
 		this.pausat=false;
 	}
 }
