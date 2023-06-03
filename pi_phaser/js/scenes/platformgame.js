@@ -1,6 +1,7 @@
 class PlatformScene extends Phaser.Scene {
 	constructor(){
 		super('PlatformScene');
+		this.veil=null;
 		this.platforms=null;
 		this.player=null;
 		this.cursors=null;
@@ -30,9 +31,9 @@ class PlatformScene extends Phaser.Scene {
 		this.enemy8=null;
 		this.enemy9=null;
 		this.arrayenemys=[]
-		this.nVides=3;
 		this.spawnx=100;
 		this.spawny=555;
+		this.pausat=false
 	}
 	
 	preload(){
@@ -45,6 +46,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('porta2','../resources/porta2.png'); 
 		this.load.spritesheet('dude','../resources/girl2.png',{frameWidth:28,frameHeight:68}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
+		this.load.image('pause','../resources/Pause.png');
 	}
 
 	create(){
@@ -194,97 +196,97 @@ class PlatformScene extends Phaser.Scene {
 				this.physics.add.overlap(this.player,this.arrayenemys[i],(body1,body2)=>this.collision(body1,body2));
 			}
 		}
-		
-		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 1
-			if (this.velocitatEnemy1 > 0){
-				this.velocitatEnemy1 = -40;
-			}
-			else{
-				this.velocitatEnemy1 = 40;
-			}
-			this.arrayenemys[0].setVelocityX(this.velocitatEnemy1);
-		}, 17000);
-		
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 2
-			if (this.velocitatEnemy2 > 0){
-				this.velocitatEnemy2 = -40;
-			}
-			else{
-				this.velocitatEnemy2 = 40;
-			}
-			this.arrayenemys[1].setVelocityX(this.velocitatEnemy2);
-		}, 10500);
+		{
+			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 1
+				if (this.velocitatEnemy1 > 0){
+					this.velocitatEnemy1 = -40;
+				}
+				else{
+					this.velocitatEnemy1 = 40;
+				}
+				this.arrayenemys[0].setVelocityX(this.velocitatEnemy1);
+			}, 17000);
+			
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 2
+				if (this.velocitatEnemy2 > 0){
+					this.velocitatEnemy2 = -40;
+				}
+				else{
+					this.velocitatEnemy2 = 40;
+				}
+				this.arrayenemys[1].setVelocityX(this.velocitatEnemy2);
+			}, 10500);
 
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 3
-			if (this.velocitatEnemy3 > 0){
-				this.velocitatEnemy3 = -40;
-			}
-			else{
-				this.velocitatEnemy3 = 40;
-			}
-			this.arrayenemys[2].setVelocityX(this.velocitatEnemy3);
-		}, 8000);
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 3
+				if (this.velocitatEnemy3 > 0){
+					this.velocitatEnemy3 = -40;
+				}
+				else{
+					this.velocitatEnemy3 = 40;
+				}
+				this.arrayenemys[2].setVelocityX(this.velocitatEnemy3);
+			}, 8000);
 
-		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 4
-			if (this.velocitatEnemy4 > 0){
-				this.velocitatEnemy4 = -40;
-			}
-			else{
-				this.velocitatEnemy4 = 40;
-			}
-			this.arrayenemys[3].setVelocityX(this.velocitatEnemy4);
-		}, 9000);
-		
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 5
-			if (this.velocitatEnemy5 > 0){
-				this.velocitatEnemy5 = -40;
-			}
-			else{
-				this.velocitatEnemy5 = 40;
-			}
-			this.arrayenemys[4].setVelocityX(this.velocitatEnemy5);
-		}, 8500);
+			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 4
+				if (this.velocitatEnemy4 > 0){
+					this.velocitatEnemy4 = -40;
+				}
+				else{
+					this.velocitatEnemy4 = 40;
+				}
+				this.arrayenemys[3].setVelocityX(this.velocitatEnemy4);
+			}, 9000);
+			
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 5
+				if (this.velocitatEnemy5 > 0){
+					this.velocitatEnemy5 = -40;
+				}
+				else{
+					this.velocitatEnemy5 = 40;
+				}
+				this.arrayenemys[4].setVelocityX(this.velocitatEnemy5);
+			}, 8500);
 
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 6
-			if (this.velocitatEnemy6 > 0){
-				this.velocitatEnemy6 = -40;
-			}
-			else{
-				this.velocitatEnemy6 = 40;
-			}
-			this.arrayenemys[5].setVelocityX(this.velocitatEnemy6);
-		}, 4000);
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 6
+				if (this.velocitatEnemy6 > 0){
+					this.velocitatEnemy6 = -40;
+				}
+				else{
+					this.velocitatEnemy6 = 40;
+				}
+				this.arrayenemys[5].setVelocityX(this.velocitatEnemy6);
+			}, 4000);
 
-		setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 7
-			if (this.velocitatEnemy7 > 0){
-				this.velocitatEnemy7 = -40;
-			}
-			else{
-				this.velocitatEnemy7 = 40;
-			}
-			this.arrayenemys[6].setVelocityX(this.velocitatEnemy7);
-		}, 7000);
-		
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 8
-			if (this.velocitatEnemy8 > 0){
-				this.velocitatEnemy8 = -40;
-			}
-			else{
-				this.velocitatEnemy8 = 40;
-			}
-			this.arrayenemys[7].setVelocityX(this.velocitatEnemy8);
-		}, 13000);
+			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 7
+				if (this.velocitatEnemy7 > 0){
+					this.velocitatEnemy7 = -40;
+				}
+				else{
+					this.velocitatEnemy7 = 40;
+				}
+				this.arrayenemys[6].setVelocityX(this.velocitatEnemy7);
+			}, 7000);
+			
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 8
+				if (this.velocitatEnemy8 > 0){
+					this.velocitatEnemy8 = -40;
+				}
+				else{
+					this.velocitatEnemy8 = 40;
+				}
+				this.arrayenemys[7].setVelocityX(this.velocitatEnemy8);
+			}, 13000);
 
-		setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 9
-			if (this.velocitatEnemy9 > 0){
-				this.velocitatEnemy9 = -40;
-			}
-			else{
-				this.velocitatEnemy9 = 40;
-			}
-			this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
-		}, 12000);
-
+			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 9
+				if (this.velocitatEnemy9 > 0){
+					this.velocitatEnemy9 = -40;
+				}
+				else{
+					this.velocitatEnemy9 = 40;
+				}
+				this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
+			}, 12000);
+		}
 	}
 
 	update(){
@@ -309,6 +311,20 @@ class PlatformScene extends Phaser.Scene {
 				}
 			},50)
 		}
+		if(this.cursors.shift.isDown){
+			if(!this.pausat){
+				setTimeout(() => {
+					console.log("pausa");
+					this.createPauseScreen();
+				},200)
+			}
+			if(this.pausat){
+				setTimeout(() => {	
+					console.log("no pausa");
+					this.removePauseScreen();
+				},200)
+			}
+		}
 
 	}
 
@@ -317,7 +333,6 @@ class PlatformScene extends Phaser.Scene {
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("hidden");
-				//Rand para cambiar sprite de puerta a no molestar
 				this.portes.create(door.x,door.y,'porta').setScale(0.19).refreshBody();
 			}
 		}
@@ -329,20 +344,15 @@ class PlatformScene extends Phaser.Scene {
 					this.portes.remove(this.portes.getLast(true), true);
 				},50)
 			}
+			
 		}
+		
 	}
 
 	collision(player,enemy){
 		if(!this.hidden){
 			console.log("tocat");
-			this.nVides -= 1;
-			if (this.nVides < 0){
-				//PERDRE
-			}
-			else{
-				//RESPAWNEAR
-			}
-			console.log(this.nVides);
+			setTimeout(()=>loadpage("./phasergamePlatform.html"),100)
 		}
 	}
 	guanya(player,meta){
@@ -354,6 +364,13 @@ class PlatformScene extends Phaser.Scene {
 				this.nVides += 1;
 			}
 		}
-		//AQUI TINE QUE RESPAWNEAR EL PERSONAJE Y RESTAR VIDA O LO QUE HAGAMOS
+	}
+	createPauseScreen(){
+		this.physics.pause()
+		this.pausat=true;
+	}
+	removePauseScreen(){
+		this.physics.resume()
+		this.pausat=false;
 	}
 }
