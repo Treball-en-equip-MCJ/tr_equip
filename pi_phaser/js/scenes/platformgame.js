@@ -290,21 +290,22 @@ class PlatformScene extends Phaser.Scene {
 	update(){
 		if(this.cursors.left.isDown && !this.hidden){
 			this.player.setVelocityX(-160);
-			//animació aqui
+			this.player.anims.play('left', true);
+			this.player.setScale(-1,1);
 		}
 		else if(this.cursors.right.isDown && !this.hidden){
 			this.player.setVelocityX(160);
-			//animació aqui
+			this.player.anims.play('right', true);
+			this.player.setScale(1,1);
 		}
 		else {
 			this.player.setVelocityX(0);
-			//animació aqui
+			this.player.anims.play('turn');
 		}
 		if(this.cursors.up.isDown && this.player.body.touching.down){
 			setTimeout(() => {
 				if(!this.hidden){
 					this.player.setVelocityY(-400);
-					//animació aqui
 				}
 			},50)
 		}
