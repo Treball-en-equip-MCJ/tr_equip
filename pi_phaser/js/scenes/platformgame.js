@@ -91,9 +91,23 @@ class PlatformScene extends Phaser.Scene {
 		}
 		{//CREEM LES CLAUS I LES PORTES
 			this.keys=this.physics.add.staticGroup();
-			this.keys.create(50,170,'key').setScale(0.3).refreshBody();
-			this.keys.create(500,170,'key').setScale(0.3).refreshBody();
-			this.keys.create(1570,564,'key').setScale(0.3).refreshBody();
+			var keySpawn=Math.random()*10;
+			console.log(keySpawn)
+			if(keySpawn<3){
+				this.keys.create(50,170,'key').setScale(0.3).refreshBody();
+				this.keys.create(500,170,'key').setScale(0.3).refreshBody();
+				this.keys.create(1570,564,'key').setScale(0.3).refreshBody();
+			}
+			else if(keySpawn>=3 && keySpawn<6){
+				this.keys.create(800,170,'key').setScale(0.3).refreshBody();
+				this.keys.create(750,370,'key').setScale(0.3).refreshBody();
+				this.keys.create(1570,564,'key').setScale(0.3).refreshBody();
+			}
+			else{
+				this.keys.create(50,370,'key').setScale(0.3).refreshBody();
+				this.keys.create(500,170,'key').setScale(0.3).refreshBody();
+				this.keys.create(1000,564,'key').setScale(0.3).refreshBody();
+			}
 
 			this.doors=this.physics.add.staticGroup();
 			
