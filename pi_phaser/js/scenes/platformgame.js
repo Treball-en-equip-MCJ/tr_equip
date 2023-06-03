@@ -33,7 +33,9 @@ class PlatformScene extends Phaser.Scene {
 		this.arrayenemys=[]
 		this.spawnx=100;
 		this.spawny=555;
-		this.pausat=false
+		this.pausat=false;
+		this.botoResume="";
+		this.botoSortir ="";
 	}
 	
 	preload(){
@@ -50,7 +52,8 @@ class PlatformScene extends Phaser.Scene {
 	}
 
 	create(){
-		this.add.image(600,350,'background').setScale(0.6);
+	
+		this.add.image(600,350,'background').setScale(0.6);	
 		{
 			this.platforms = this.physics.add.staticGroup();
 			this.platforms.create(600,40,'ground').setScale(1.5).refreshBody();
@@ -101,7 +104,7 @@ class PlatformScene extends Phaser.Scene {
 			
 			this.portes=this.physics.add.staticGroup();
 			this.meta=this.physics.add.staticGroup();
-			this.meta.create(1091.5,155,'door').setScale(0.9).refreshBody();
+			this.meta.create(1091.5,155,'porta2').setScale(0.19).refreshBody();
 		}
 		{
 			this.player=this.physics.add.sprite(this.spawnx,this.spawny,'dude');
@@ -287,6 +290,12 @@ class PlatformScene extends Phaser.Scene {
 				this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
 			}, 12000);
 		}
+		this.botoResume = this.add.text(700,300, 'Prem SHIFT per continuar', {fill: '#fff'} ).setScale(1.5);
+		this.botoResume.setBackgroundColor('#7b3046');
+		this.botoResume.visible=false;
+		this.botoSortir = this.add.text(700,400, 'Prem SPACE per sortir', {fill: '#fff'} ).setScale(1.5);
+		this.botoSortir.setBackgroundColor('#7b3046');
+		this.botoSortir.visible=false;
 	}
 
 	update(){
@@ -325,6 +334,11 @@ class PlatformScene extends Phaser.Scene {
 				},200)
 			}
 		}
+		if(this.cursors.space.isDown){
+			if(this.pausat){
+				setTimeout(()=>loadpage("../"),100)
+			}
+		}
 
 	}
 
@@ -360,16 +374,20 @@ class PlatformScene extends Phaser.Scene {
 			if(!this.hidden){
 				this.hidden=true;
 				console.log("guanyes");
-				this.portes.create(meta.x,meta.y,'porta2').setScale(0.19).refreshBody();
+				this.portes.create(meta.x,meta.y,'door').setScale(0.9).refreshBody();
 				this.nVides += 1;
 			}
 		}
 	}
 	createPauseScreen(){
+		this.botoResume.visible=true;
+		this.botoSortir.visible=true;
 		this.physics.pause()
 		this.pausat=true;
 	}
 	removePauseScreen(){
+		this.botoResume.visible=false;
+		this.botoSortir.visible=false;
 		this.physics.resume()
 		this.pausat=false;
 	}
