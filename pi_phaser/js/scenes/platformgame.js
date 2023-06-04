@@ -49,8 +49,8 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
-		this.load.spritesheet('dude','../resources/girl2.png',{frameWidth:28,frameHeight:68}); //Modificar amb el personatge
-		this.load.spritesheet('enemy','../resources/enemy.png',{frameWidth:120,frameHeight:60});
+		this.load.spritesheet('dude','../resources/guy2.png',{frameWidth:56,frameHeight:58}); //Modificar amb el personatge
+		this.load.spritesheet('enemy','../resources/monster.png',{frameWidth:32,frameHeight:32});
 		this.load.image('pause','../resources/Pause.png');
 	}
 
@@ -141,73 +141,97 @@ class PlatformScene extends Phaser.Scene {
 
 			this.anims.create({
 				key: 'turn',
-				frames: [ { key: 'dude', frame: 4 } ],
+				frames: [ { key: 'dude', frame: 0 } ],
 				frameRate: 20
 			});
 
 			this.anims.create({
 				key: 'right',
-				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6 }),
+				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6}),
 				frameRate: 10,
 				repeat: -1
 			});
 		}
 		{
-			this.enemy1=this.physics.add.sprite(200,570,'enemy');
+			this.enemy1=this.physics.add.sprite(300,600,'enemy');
 			this.enemy1.setBounce(0.2);
 			this.enemy1.setCollideWorldBounds(true);
 			this.enemy1.setVelocityX(this.velocitatEnemy1);
 			this.enemy1.depth=3;
 			this.arrayenemys.push(this.enemy1);
-			this.enemy2=this.physics.add.sprite(1200,570,'enemy');
+			this.enemy2=this.physics.add.sprite(1200,600,'enemy');
 			this.enemy2.setBounce(0.2);
 			this.enemy2.setCollideWorldBounds(true);
 			this.enemy2.setVelocityX(this.velocitatEnemy2);
 			this.enemy2.depth=3;
 			this.arrayenemys.push(this.enemy2);
-			this.enemy3=this.physics.add.sprite(60,360,'enemy');
+			this.enemy3=this.physics.add.sprite(60,400,'enemy');
 			this.enemy3.setBounce(0.2);
 			this.enemy3.setCollideWorldBounds(true);
 			this.enemy3.setVelocityX(this.velocitatEnemy3);
 			this.enemy3.depth=3;
 			this.arrayenemys.push(this.enemy3);
-			this.enemy4=this.physics.add.sprite(560,360,'enemy');
+			this.enemy4=this.physics.add.sprite(560,400,'enemy');
 			this.enemy4.setBounce(0.2);
 			this.enemy4.setCollideWorldBounds(true);
 			this.enemy4.setVelocityX(this.velocitatEnemy4);
 			this.enemy4.depth=3;
 			this.arrayenemys.push(this.enemy4);
-			this.enemy5=this.physics.add.sprite(1050,360,'enemy');
+			this.enemy5=this.physics.add.sprite(1050,400,'enemy');
 			this.enemy5.setBounce(0.2);
 			this.enemy5.setCollideWorldBounds(true);
 			this.enemy5.setVelocityX(this.velocitatEnemy5);
 			this.enemy5.depth=3;
 			this.arrayenemys.push(this.enemy5);
-			this.enemy6=this.physics.add.sprite(60,150,'enemy');
+			this.enemy6=this.physics.add.sprite(30,190,'enemy');
 			this.enemy6.setBounce(0.2);
 			this.enemy6.setCollideWorldBounds(true);
 			this.enemy6.setVelocityX(this.velocitatEnemy6);
 			this.enemy6.depth=3;
 			this.arrayenemys.push(this.enemy6);
-			this.enemy7=this.physics.add.sprite(350,150,'enemy');
+			this.enemy7=this.physics.add.sprite(350,190,'enemy');
 			this.enemy7.setBounce(0.2);
 			this.enemy7.setCollideWorldBounds(true);
 			this.enemy7.setVelocityX(this.velocitatEnemy7);
 			this.enemy7.depth=3;
 			this.arrayenemys.push(this.enemy7);
-			this.enemy8=this.physics.add.sprite(710,150,'enemy');
+			this.enemy8=this.physics.add.sprite(710,190,'enemy');
 			this.enemy8.setBounce(0.2);
 			this.enemy8.setCollideWorldBounds(true);
 			this.enemy8.setVelocityX(this.velocitatEnemy8);
 			this.enemy8.depth=3;
 			this.arrayenemys.push(this.enemy8);
-			this.enemy9=this.physics.add.sprite(1000,150,'enemy');
+			this.enemy9=this.physics.add.sprite(1000,190,'enemy');
 			this.enemy9.setBounce(0.2);
 			this.enemy9.setCollideWorldBounds(true);
 			this.enemy9.setVelocityX(this.velocitatEnemy9);
 			this.enemy9.depth=3;
 			this.arrayenemys.push(this.enemy9);
-			//FALTEN ANIMACIONS	
+
+			this.anims.create({
+				key: 'enemy-left',
+				frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6 }),
+				frameRate: 10,
+				repeat: -1
+			});
+
+			this.anims.create({
+				key: 'enemy-right',
+				frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6}),
+				frameRate: 10,
+				repeat: -1
+			});
+
+			this.enemy1.anims.play('enemy-right', true);
+			this.enemy2.anims.play('enemy-right', true);
+			this.enemy3.anims.play('enemy-right', true);
+			this.enemy4.anims.play('enemy-right', true);
+			this.enemy5.anims.play('enemy-right', true);
+			this.enemy6.anims.play('enemy-right', true);
+			this.enemy7.anims.play('enemy-right', true);
+			this.enemy8.anims.play('enemy-right', true);
+			this.enemy9.anims.play('enemy-right', true);
+			
 		}
 		{
 			this.physics.add.collider(this.player,this.platforms);
@@ -226,9 +250,13 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 1
 				if (this.velocitatEnemy1 > 0){
 					this.velocitatEnemy1 = -40;
+					this.enemy1.anims.play('enemy-left', true);
+					this.enemy1.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy1 = 40;
+					this.enemy1.anims.play('enemy-right', true);
+					this.enemy1.setScale(1,1);
 				}
 				this.arrayenemys[0].setVelocityX(this.velocitatEnemy1);
 			}, 17000);
@@ -236,9 +264,13 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 2
 				if (this.velocitatEnemy2 > 0){
 					this.velocitatEnemy2 = -40;
+					this.enemy2.anims.play('enemy-left', true);
+					this.enemy2.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy2 = 40;
+					this.enemy2.anims.play('enemy-left', true);
+					this.enemy2.setScale(1,1);
 				}
 				this.arrayenemys[1].setVelocityX(this.velocitatEnemy2);
 			}, 10500);
@@ -246,9 +278,13 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 3
 				if (this.velocitatEnemy3 > 0){
 					this.velocitatEnemy3 = -40;
+					this.enemy3.anims.play('enemy-left', true);
+					this.enemy3.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy3 = 40;
+					this.enemy3.anims.play('enemy-right', true);
+					this.enemy3.setScale(1,1);
 				}
 				this.arrayenemys[2].setVelocityX(this.velocitatEnemy3);
 			}, 8000);
@@ -256,49 +292,69 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 4
 				if (this.velocitatEnemy4 > 0){
 					this.velocitatEnemy4 = -40;
+					this.enemy4.anims.play('enemy-left', true);
+					this.enemy4.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy4 = 40;
+					this.enemy4.anims.play('enemy-right', true);
+					this.enemy4.setScale(1,1);
 				}
 				this.arrayenemys[3].setVelocityX(this.velocitatEnemy4);
-			}, 9000);
+			}, 8000);
 			
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 5
 				if (this.velocitatEnemy5 > 0){
 					this.velocitatEnemy5 = -40;
+					this.enemy5.anims.play('enemy-left', true);
+					this.enemy5.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy5 = 40;
+					this.enemy5.anims.play('enemy-right', true);
+					this.enemy5.setScale(1,1);
 				}
 				this.arrayenemys[4].setVelocityX(this.velocitatEnemy5);
-			}, 8500);
+			}, 8200);
 
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 6
 				if (this.velocitatEnemy6 > 0){
 					this.velocitatEnemy6 = -40;
+					this.enemy6.anims.play('enemy-left', true);
+					this.enemy6.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy6 = 40;
+					this.enemy6.anims.play('enemy-right', true);
+					this.enemy6.setScale(1,1);
 				}
 				this.arrayenemys[5].setVelocityX(this.velocitatEnemy6);
-			}, 4000);
+			}, 3300);
 
 			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 7
 				if (this.velocitatEnemy7 > 0){
 					this.velocitatEnemy7 = -40;
+					this.enemy7.anims.play('enemy-left', true);
+					this.enemy7.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy7 = 40;
+					this.enemy7.anims.play('enemy-right', true);
+					this.enemy7.setScale(1,1);
 				}
 				this.arrayenemys[6].setVelocityX(this.velocitatEnemy7);
 			}, 7000);
 			
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 8
 				if (this.velocitatEnemy8 > 0){
+					this.enemy8.anims.play('enemy-left', true);
 					this.velocitatEnemy8 = -40;
+					this.enemy8.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy8 = 40;
+					this.enemy8.setScale(1,1);
+					this.enemy8.anims.play('enemy-right', true);
 				}
 				this.arrayenemys[7].setVelocityX(this.velocitatEnemy8);
 			}, 13000);
@@ -306,12 +362,16 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 9
 				if (this.velocitatEnemy9 > 0){
 					this.velocitatEnemy9 = -40;
+					this.enemy9.setScale(-1,1);
+					this.enemy9.anims.play('enemy-left', true);
 				}
 				else{
 					this.velocitatEnemy9 = 40;
+					this.enemy9.anims.play('enemy-right', true);
+					this.enemy9.setScale(1,1);
 				}
 				this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
-			}, 12000);
+			}, 11500);
 		}
 		this.botoResume = this.add.text(700,300, 'Prem SHIFT per continuar', {fill: '#fff'} ).setScale(1.5);
 		this.botoResume.setBackgroundColor('#7b3046');

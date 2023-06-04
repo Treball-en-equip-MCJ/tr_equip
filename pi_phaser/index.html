@@ -7,8 +7,22 @@
 		<script src="./js/menu_controller.js"></script>
 		<title> My first game - Menu </title>
 	</head>
+
+	
+	  
 	<body>
 		<p class="menu-object" id="title">Memory menu</p>
+
+		<svg height="110" width="130">
+			<defs>
+			  <filter id="f1" x="0" y="0">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+			  </filter>
+			</defs>
+			<rect width="90" height="90" stroke="green" stroke-width="3"
+			fill="#7b3d91" filter="url(#f1)" />
+		</svg>
+
 		<button class="menu-object" onclick="start_phasergame_platform()"> 
 			Platform Game
 		</button>
