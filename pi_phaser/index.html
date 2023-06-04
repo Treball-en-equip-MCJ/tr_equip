@@ -5,24 +5,27 @@
 		<script src="./js/loader.js"></script>
 		<script src="./js/game_info.js"></script>
 		<script src="./js/menu_controller.js"></script>
-		<title> My first game - Menu </title>
+		<title> Sneak Game - Menu </title>
 	</head>
 
 	
 	  
 	<body>
-		<p class="menu-object" id="title">Memory menu</p>
-
-		<svg height="110" width="130">
+		<br>
+		<svg class= "menu-object" height="150" width="500">
 			<defs>
-			  <filter id="f1" x="0" y="0">
-				<feGaussianBlur in="SourceGraphic" stdDeviation="15" />
-			  </filter>
+			  <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+				<stop offset="0%" style="stop-color:rgb(27, 9, 198);stop-opacity:0" />
+				<stop offset="100%" style="stop-color:rgb(59, 65, 103);stop-opacity:1" />
+			  </radialGradient>
 			</defs>
-			<rect width="90" height="90" stroke="green" stroke-width="3"
-			fill="#7b3d91" filter="url(#f1)" />
+			<ellipse cx="150" cy="55" rx="85" ry="55" fill="url(#grad1)" />
+			<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="25px">
+				Sneak Game
+			</text>
 		</svg>
-
+		<br>
+		<br>
 		<button class="menu-object" onclick="start_phasergame_platform()"> 
 			Platform Game
 		</button>
