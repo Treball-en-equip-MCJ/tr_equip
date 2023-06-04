@@ -51,8 +51,8 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
 		this.load.image('stair','../resources/escala.png'); 
-		this.load.spritesheet('dude','../resources/guy4.png',{frameWidth:39,frameHeight:41}); //Modificar amb el personatge
-		this.load.spritesheet('enemy','../resources/monster.png',{frameWidth:32,frameHeight:32});
+		this.load.spritesheet('dude','../resources/guy5.png',{frameWidth:39,frameHeight:43}); //Modificar amb el personatge
+		this.load.spritesheet('enemy','../resources/monster2.png',{frameWidth:32,frameHeight:32});
 		this.load.image('pause','../resources/Pause.png');
 	}
 
@@ -154,7 +154,7 @@ class PlatformScene extends Phaser.Scene {
 
 			this.anims.create({
 				key: 'turn',
-				frames: [ { key: 'dude', frame: 4 } ],
+				frames: [ { key: 'dude', frame: 8 } ],
 				frameRate: 10
 			});
 
@@ -202,7 +202,7 @@ class PlatformScene extends Phaser.Scene {
 			this.enemy6.setVelocityX(this.velocitatEnemy6);
 			this.enemy6.depth=3;
 			this.arrayenemys.push(this.enemy6);
-			this.enemy7=this.physics.add.sprite(350,190,'enemy');
+			this.enemy7=this.physics.add.sprite(360,190,'enemy');
 			this.enemy7.setBounce(0.2);
 			this.enemy7.setCollideWorldBounds(true);
 			this.enemy7.setVelocityX(this.velocitatEnemy7);
@@ -223,14 +223,14 @@ class PlatformScene extends Phaser.Scene {
 
 			this.anims.create({
 				key: 'enemy-left',
-				frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6 }),
+				frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 5}),
 				frameRate: 10,
 				repeat: -1
 			});
 
 			this.anims.create({
 				key: 'enemy-right',
-				frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 6}),
+				frames: this.anims.generateFrameNumbers('enemy', { start: 6, end: 11}),
 				frameRate: 10,
 				repeat: -1
 			});
@@ -264,12 +264,10 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy1 > 0){
 					this.velocitatEnemy1 = -40;
 					this.enemy1.anims.play('enemy-left', true);
-					//this.enemy1.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy1 = 40;
 					this.enemy1.anims.play('enemy-right', true);
-					//this.enemy1.setScale(1,1);
 				}
 				this.arrayenemys[0].setVelocityX(this.velocitatEnemy1);
 			}, 17000);
@@ -278,12 +276,10 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy2 > 0){
 					this.velocitatEnemy2 = -40;
 					this.enemy2.anims.play('enemy-left', true);
-					//this.enemy2.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy2 = 40;
-					this.enemy2.anims.play('enemy-left', true);
-					//this.enemy2.setScale(1,1);
+					this.enemy2.anims.play('enemy-right', true);
 				}
 				this.arrayenemys[1].setVelocityX(this.velocitatEnemy2);
 			}, 10500);
@@ -292,12 +288,10 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy3 > 0){
 					this.velocitatEnemy3 = -40;
 					this.enemy3.anims.play('enemy-left', true);
-					//this.enemy3.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy3 = 40;
 					this.enemy3.anims.play('enemy-right', true);
-					//this.enemy3.setScale(1,1);
 				}
 				this.arrayenemys[2].setVelocityX(this.velocitatEnemy3);
 			}, 8000);
@@ -306,12 +300,10 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy4 > 0){
 					this.velocitatEnemy4 = -40;
 					this.enemy4.anims.play('enemy-left', true);
-					//this.enemy4.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy4 = 40;
 					this.enemy4.anims.play('enemy-right', true);
-					//this.enemy4.setScale(1,1);
 				}
 				this.arrayenemys[3].setVelocityX(this.velocitatEnemy4);
 			}, 8000);
@@ -320,12 +312,10 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy5 > 0){
 					this.velocitatEnemy5 = -40;
 					this.enemy5.anims.play('enemy-left', true);
-					//this.enemy5.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy5 = 40;
 					this.enemy5.anims.play('enemy-right', true);
-					//this.enemy5.setScale(1,1);
 				}
 				this.arrayenemys[4].setVelocityX(this.velocitatEnemy5);
 			}, 8200);
@@ -334,26 +324,22 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy6 > 0){
 					this.velocitatEnemy6 = -40;
 					this.enemy6.anims.play('enemy-left', true);
-					//this.enemy6.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy6 = 40;
 					this.enemy6.anims.play('enemy-right', true);
-					//this.enemy6.setScale(1,1);
 				}
 				this.arrayenemys[5].setVelocityX(this.velocitatEnemy6);
-			}, 3300);
+			}, 3200);
 
 			setInterval(() => {  //DEFINEIX MOVIMENT DE ENEMY 7
 				if (this.velocitatEnemy7 > 0){
 					this.velocitatEnemy7 = -45;
 					this.enemy7.anims.play('enemy-left', true);
-					//this.enemy7.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy7 = 45;
 					this.enemy7.anims.play('enemy-right', true);
-					//this.enemy7.setScale(1,1);
 				}
 				this.arrayenemys[6].setVelocityX(this.velocitatEnemy7);
 			}, 7000);
@@ -362,11 +348,9 @@ class PlatformScene extends Phaser.Scene {
 				if (this.velocitatEnemy8 > 0){
 					this.enemy8.anims.play('enemy-left', true);
 					this.velocitatEnemy8 = -40;
-					//this.enemy8.setScale(-1,1);
 				}
 				else{
 					this.velocitatEnemy8 = 40;
-					//this.enemy8.setScale(1,1);
 					this.enemy8.anims.play('enemy-right', true);
 				}
 				this.arrayenemys[7].setVelocityX(this.velocitatEnemy8);
@@ -375,13 +359,11 @@ class PlatformScene extends Phaser.Scene {
 			setInterval(() => {   //DEFINEIX MOVIEMNT DE ENEMY 9
 				if (this.velocitatEnemy9 > 0){
 					this.velocitatEnemy9 = -40;
-					//this.enemy9.setScale(-1,1);
 					this.enemy9.anims.play('enemy-left', true);
 				}
 				else{
 					this.velocitatEnemy9 = 40;
 					this.enemy9.anims.play('enemy-right', true);
-					//this.enemy9.setScale(1,1);
 				}
 				this.arrayenemys[8].setVelocityX(this.velocitatEnemy9);
 			}, 11500);
