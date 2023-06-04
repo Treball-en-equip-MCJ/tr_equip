@@ -16,7 +16,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('ground','../resources/ground.png');//Modificar amb el sprite del terra
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/door.png'); //Modificar amb el sprite de la porta tancada
-		this.load.spritesheet('dude','../resources/girl.png',{frameWidth:64,frameHeight:48}); //Modificar amb el personatge
+		this.load.spritesheet('dude','../resources/dude.png',{frameWidth:64,frameHeight:48}); //Modificar amb el personatge
 	}
 
 	create(){

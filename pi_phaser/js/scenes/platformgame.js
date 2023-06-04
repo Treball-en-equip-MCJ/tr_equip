@@ -49,7 +49,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
-		this.load.spritesheet('dude','../resources/guy2.png',{frameWidth:56,frameHeight:58}); //Modificar amb el personatge
+		this.load.spritesheet('dude','../resources/guy4.png',{frameWidth:39,frameHeight:41}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/monster.png',{frameWidth:32,frameHeight:32});
 		this.load.image('pause','../resources/Pause.png');
 	}
@@ -134,20 +134,20 @@ class PlatformScene extends Phaser.Scene {
 			
 			this.anims.create({
 				key: 'left',
-				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6 }),
+				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
 				frameRate: 10,
 				repeat: -1
 			});
 
 			this.anims.create({
 				key: 'turn',
-				frames: [ { key: 'dude', frame: 0 } ],
-				frameRate: 20
+				frames: [ { key: 'dude', frame: 4 } ],
+				frameRate: 10
 			});
 
 			this.anims.create({
 				key: 'right',
-				frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 6}),
+				frames: this.anims.generateFrameNumbers('dude', { start: 4, end: 7}),
 				frameRate: 10,
 				repeat: -1
 			});
@@ -385,12 +385,11 @@ class PlatformScene extends Phaser.Scene {
 		if(this.cursors.left.isDown && !this.hidden){
 			this.player.setVelocityX(-160);
 			this.player.anims.play('left', true);
-			this.player.setScale(-1,1);
+			
 		}
 		else if(this.cursors.right.isDown && !this.hidden){
 			this.player.setVelocityX(160);
 			this.player.anims.play('right', true);
-			this.player.setScale(1,1);
 		}
 		else {
 			this.player.setVelocityX(0);
