@@ -38,6 +38,7 @@ class PlatformScene extends Phaser.Scene {
 		this.pausat=false;
 		this.botoResume="";
 		this.botoSortir ="";
+		this.explain="";
 	}
 	
 	preload(){
@@ -49,6 +50,7 @@ class PlatformScene extends Phaser.Scene {
 		this.load.image('door','../resources/door.png');
 		this.load.image('porta','../resources/porta1.png'); 
 		this.load.image('porta2','../resources/porta2.png'); 
+		this.load.image('stair','../resources/escala.png'); 
 		this.load.spritesheet('dude','../resources/guy4.png',{frameWidth:39,frameHeight:41}); //Modificar amb el personatge
 		this.load.spritesheet('enemy','../resources/monster.png',{frameWidth:32,frameHeight:32});
 		this.load.image('pause','../resources/Pause.png');
@@ -56,6 +58,13 @@ class PlatformScene extends Phaser.Scene {
 
 	create(){
 		this.add.image(600,350,'background').setScale(0.6);	
+		{//AFEGIM LES SPRITES DE LES ESCALES
+			this.add.image(457,540,'stair').setScale(0.2);
+			this.add.image(1437,540,'stair').setScale(0.2);
+			this.add.image(947,540,'stair').setScale(0.2);
+			this.add.image(248,335,'stair').setScale(0.2);	
+			this.add.image(1517,335,'stair').setScale(0.2);
+		}
 		{
 			this.platforms = this.physics.add.staticGroup();
 			this.platforms.create(600,40,'ground').setScale(1.5).refreshBody();
@@ -88,6 +97,10 @@ class PlatformScene extends Phaser.Scene {
 			this.platforms.create(700,456,'ground2').setScale(1.25).refreshBody();
 			this.platforms.create(1190,456,'ground2').setScale(1.25).refreshBody();
 			this.platforms.create(1680,456,'ground2').setScale(1.25).refreshBody();
+		}
+		{
+			this.explain = this.add.text(700,50, 'Prem SHIFT per pausar', {fill: '#fff'} ).setScale(1.5);
+			this.explain.setBackgroundColor('#7b3046');
 		}
 		{//CREEM LES CLAUS I LES PORTES
 			this.keys=this.physics.add.staticGroup();
@@ -456,7 +469,10 @@ class PlatformScene extends Phaser.Scene {
 				this.hidden=true;
 				console.log("guanyes");
 				this.portes.create(meta.x,meta.y,'door').setScale(0.9).refreshBody();
-				this.nVides += 1;
+				this.physics.pause();
+				this.botoResume = this.add.text(700,300, 'HAS GUANYAT', {fill: '#fff'} ).setScale(1.5);
+				this.botoResume.setBackgroundColor('#7b3046');
+				setTimeout(()=>loadpage("../"),1000)
 			}
 		}
 	}
@@ -468,12 +484,14 @@ class PlatformScene extends Phaser.Scene {
 	createPauseScreen(){
 		this.botoResume.visible=true;
 		this.botoSortir.visible=true;
+		this.explain.visible=false;
 		this.physics.pause();
 		this.pausat=true;
 	}
 	removePauseScreen(){
 		this.botoResume.visible=false;
 		this.botoSortir.visible=false;
+		this.explain.visible=true;
 		this.physics.resume();
 		this.pausat=false;
 	}
