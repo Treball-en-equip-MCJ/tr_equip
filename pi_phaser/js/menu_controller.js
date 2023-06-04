@@ -23,8 +23,6 @@ function start_phasergame_mode2(){
 }
 
 function start_phasergame_platform(){
-	name = prompt("User name");
-	sessionStorage.setItem("username", name);
 	loadpage("./html/phasergamePlatform.html");
 }
 
