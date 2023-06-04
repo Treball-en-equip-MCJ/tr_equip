@@ -3,11 +3,15 @@ function start_game(){
 	loadpage("./html/game.html");
 }
 
+function carrega_pi_2(){
+	loadpage("./pi_2/index.html");
+}
+
 function exit (){
-	if (name != ""){
-		alert("Leaving " + name + "'s game");
-	}
-	name = "";
+	loadpage("../index.html");
+}
+
+function enrere (){
 	loadpage("../index.html");
 }
 
@@ -16,6 +20,4 @@ function options(){
 	console.log("Options menu button");
 }
 
-function iniciar(){
-	//loadpage("./pi_2/index.html");
-}
+
